@@ -17,9 +17,9 @@ def main():
     parser.add_argument('--load_path_data',
                         default='%s/../data/test' % os.path.dirname(os.path.abspath(__file__)))
     parser.add_argument('--load_path_model',
-                        default='%s/../../output/model/' % os.path.dirname(os.path.abspath(__file__)))
+                        default='%s/../output/model/' % os.path.dirname(os.path.abspath(__file__)))
     parser.add_argument('--save_path',
-                        default='%s/../../output/prediction/' % os.path.dirname(os.path.abspath(__file__)))
+                        default='%s/../output/prediction/' % os.path.dirname(os.path.abspath(__file__)))
     parser.add_argument('--file_name', default='laugh_1.m4a_0.wav')
     parser.add_argument('--log_path',
                         default='%s/../' % os.path.dirname(os.path.abspath(__file__)))
