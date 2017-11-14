@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import pandas as pd
+# import pandas as pd
 import numpy as np
-import logging
-import timeit
-#from librosa.feature import zero_crossing_rate, mfcc, spectral_centroid, spectral_rolloff, spectral_bandwidth,\
-#   chroma_cens, rmse
+#from librosa.feature import zero_crossing_rate, mfcc, spectral_centroid, spectral_rolloff, spectral_bandwidth, rmse
 from pyAudioAnalysis import audioFeatureExtraction as af
 import python_speech_features as psf
+
+
+# chroma_cens, rmse
 
 __all__ = [
     'FeatureEngineer'
@@ -16,18 +16,23 @@ __all__ = [
 
 class FeatureEngineer:
     """
-    Feature engineering
+    Derive features
     """
 
     RATE = 44100   # All recordings in ESC are 44.1 kHz
     FRAME = 512    # Frame size in samples
-    nFFT = RATE / 2
+    nFFT = RATE/2
+    # Features' names
+    COL = ['zcr', 'rms_energy',
+           'mfcc0', 'mfcc1', 'mfcc2', 'mfcc3', 'mfcc4', 'mfcc5', 'mfcc6', 'mfcc7', 'mfcc8', 'mfcc9', 'mfcc10', 'mfcc11',
+           'mfcc12',
+           'sp_centroid', 'sp_rolloff', 'sp_bw'
+           # 'chroma1', 'chroma2', 'chroma3', 'chroma4', 'chroma5', 'chroma6', 'chroma7',
+           # 'chroma8', 'chroma9', 'chroma10', 'chroma11', 'chroma12'
+           ]
 
-    def __init__(self, label=None):
-        if label is None:
-            self.label = ''
-        else:
-            self.label = label
+    def __init__(self):
+        pass
 
     def feature_engineer(self, audio_data):
         """
@@ -98,5 +103,4 @@ class FeatureEngineer:
         concat_feat = np.array(concat_feat)
         concat_feat = np.concatenate((concat_feat, mfcc_feat), axis=0)
         # print concat_feat.shape
-        return np.mean(concat_feat, axis=1, keepdims=True).transpose(), self.label
-
+        return np.mean(concat_feat, axis=1, keepdims=True).transpose()

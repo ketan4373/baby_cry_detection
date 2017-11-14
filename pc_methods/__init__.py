@@ -1,6 +1,7 @@
-import librosa
+#import librosa
 import logging
 import timeit
+import soundfile
 
 __all__ = [
     'Reader'
@@ -32,8 +33,16 @@ class Reader:
 
         start = timeit.default_timer()
 
-        audio_data, sr = librosa.load(self.file_name, sr=44100, mono=True, duration=5)
+        # audio_data, sr = librosa.load(self.file_name, sr=44100, mono=True, duration=5)
+        data = soundfile.read(self.file_name)
 
+        audio_data = data[0]
+        for i in range(len(audio_data)):
+            audio_data[i] = ( audio_data[i] / 4.0) + 1
+
+        sr = data[1]
+
+        #sr, audio_data = wavfile.read(self.file_name)
         stop = timeit.default_timer()
 
         logging.info('Time taken: {0}'.format(stop - start))
